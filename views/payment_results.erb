@@ -1,0 +1,15 @@
+<h1>Payment Results</h1>
+
+<dl>
+  <dt>APR</dt>
+  <dd><%= ((@apr * 12 * 100).round(4)).to_s + "%" %></dd>
+  <dt>Years Remaining</dt>
+  <dd><%= @years %></dd>
+  <dt>Present Value</dt>
+  <dd>$<%= @present_value.to_s("F") %></dd>
+  <dt>Monthly Payment</dt>
+  <dd><%= @payment.to_fs(:currency) %></dd>
+</dl>
+
+<a href="/payment/new">Go back</a>
+
