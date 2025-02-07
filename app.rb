@@ -1,23 +1,20 @@
-require "sinatra"
-require "sinatra/reloader"
+require 'sinatra'
+require 'sinatra/reloader'
 
 get '/square/new' do
   erb :square_new
 end
 
-get("/") do
+get '/' do
   "
   <h1>Welcome to your Sinatra App!</h1>
   <p>Define some routes in app.rb</p>
   "
-  erb(:hello)
+  erb(:square_new)
 end
 
-
-
-
 get '/square/results' do
-  @number = params[:number].to_i
+  @number = params[:number].to_f
   @square = @number ** 2
   erb :square_results
 end
@@ -27,7 +24,7 @@ get '/square_root/new' do
 end
 
 get '/square_root/results' do
-  @number = params[:number].to_i
+  @number = params[:number].to_f
   @square_root = Math.sqrt(@number)
   erb :square_root_results
 end
@@ -55,6 +52,8 @@ get '/payment/results' do
   numerator = apr * present_value
   denominator = 1 - (1 + apr) ** -years
 
-  @payment = numerator / denominator
+  @payment = (numerator / denominator).round(2)
+  @formatted_payment = "$#{'%.2f' % @payment}".reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+  @formatted_apr = "#{(apr * 12 * 100).round(4)}%"
   erb :payment_results
 end
