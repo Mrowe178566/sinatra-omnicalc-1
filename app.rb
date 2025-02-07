@@ -5,6 +5,17 @@ get '/square/new' do
   erb :square_new
 end
 
+get("/") do
+  "
+  <h1>Welcome to your Sinatra App!</h1>
+  <p>Define some routes in app.rb</p>
+  "
+  erb(:hello)
+end
+
+
+
+
 get '/square/results' do
   @number = params[:number].to_i
   @square = @number ** 2
